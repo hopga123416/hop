@@ -1,0 +1,66 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script>
+  var socket = io.connect('http://localhost:8080');
+
+  socket.on('connect', function(){
+    socket.emit('adduser', prompt("What's your name?"));
+  });
+	
+  socket.on('updatechat', function (username, data) {
+    $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+  });
+  socket.on('updateimage', function (username, data) {
+    $('#conversation').append('<b>'+username + ':</b> ' +'<img src="'+ data +'"/>'+ '<br>');
+  });
+
+  socket.on('updateusers', function(data) {
+    $('#users').empty();
+    $.each(data, function(key, value) {
+		$('#users').append('<div>' + key + '</div>');
+		//$('#count').html('so nguoi da truy cap la ' + x + '<br>');
+    });
+  });
+
+
+  $(function(){
+    $('#datasend').click( function() {
+      var message = $('#data').val();
+      $('#data').val('');
+      socket.emit('sendchat', message);
+    });
+
+    $('#data').keypress(function(e) {
+      if(e.which == 13) {
+        $(this).blur();
+        $('#datasend').focus().click();
+      }
+    });
+  });
+  $(function(){
+    $('#dataimage').click( function() {
+      var message = $('#data').val();
+      $('#data').val('');
+      socket.emit('sendimage', message);
+    });
+
+    $('#data').keypress(function(e) {
+      if(e.which == 13) {
+        $(this).blur();
+        $('#dataimage').focus().click();
+      }
+    });
+  });
+
+</script>
+<div style="float:left;width:200px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
+  <b>USERS</b>
+  <div id ="count"></div>
+  <div id="users"></div>
+</div>
+<div style="float:left;width:500px;height:250px;overflow:scroll-y;padding:10px;">
+  <div id="conversation"></div>
+  <input id="data" style="width:200px;" />
+  <input type="button" id="datasend" value="send" />
+  <input type="button" id="dataimage" value="send-image" />
+</div>
