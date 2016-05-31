@@ -1,7 +1,7 @@
 {
      "name": "chat",
      "description": "example chat application with socket.io",
-     "version": "0.0.1",
+     "version": "4.4.4",
      "main":"app.js",
 	 "script":{
 		"start":"node app.js"
