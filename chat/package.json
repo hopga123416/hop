@@ -5,8 +5,8 @@
      "main":"app.js",
 	 "script":{
 		"start":"node app.js"
-	 }
-	 "dependencies": {
+	 },
+	 "dependencies":{
         "express": "",
         "socket.io": ""
      }
