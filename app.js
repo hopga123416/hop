@@ -1,5 +1,6 @@
 var express = require('express')
   , app = express()
+  , app.set('view engine', 'ejs')
   , http = require('http')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server);
@@ -8,7 +9,7 @@ server.listen(80);
 
 // routing
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+ app.set(__dirname + '/index.html');
 });
 
 var usernames = {};
