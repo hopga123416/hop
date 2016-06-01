@@ -4,7 +4,7 @@ var express = require('express')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server);
 
-server.listen(80);
+server.listen('https://hopga123416.herokuapp.com');
 
 // routing
 app.get('/', function (req, res) {
