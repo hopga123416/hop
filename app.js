@@ -8,9 +8,8 @@ var express = require('express')
 server.listen(80);
 
 // routing
-app.get('/', function (req, res) {
  app.set(__dirname + '/index.html');
-});
+
 
 var usernames = {};
 
